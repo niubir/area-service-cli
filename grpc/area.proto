@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package area;
+
+option go_package="./server";
+
+service AreaService {
+  // 刷新区域
+  rpc FreshAreas(Empty) returns (Empty) {}
+  // 获取指定区域
+  rpc GetArea(GetAreaReq) returns (GetAreaAck) {}
+  // 获取省份列表
+  rpc GetProvinces(GetProvincesReq) returns (GetProvincesAck) {}
+  // 获取城市列表
+  rpc GetCities(GetCitiesReq) returns (GetCitiesAck) {}
+  // 获取区县列表
+  rpc GetDistricts(GetDistrictsReq) returns (GetDistrictsAck) {}
+  // 获取街道列表
+  rpc GetStreets(GetStreetsReq) returns (GetStreetsAck) {}
+}
+
+message Empty {}
+
+enum Level {
+  // 未知
+  UNKNOW = 0;
+  // 国家
+  COUNTRY = 1;
+  // 省份（直辖市会在province显示）
+  PROVINCE = 2;
+  // 市（直辖市会在province显示）
+  CITY = 3;
+  // 区县
+  DISTRICT = 4;
+  // 街道
+  STREET = 5;
+}
+
+message Area {
+  // 行政区名称
+	string Name = 1;
+  // 行政区划级别
+  Level Level = 2;
+  // 区域编码
+  string Code = 3;
+  // 区域中心点
+  string Center = 4;
+  // 下级行政区列表
+  repeated Area Areas = 5;
+}
+
+message GetAreaReq {
+  // 区域编码
+  string Code = 1;
+}
+
+message GetAreaAck {
+  // 区域信息
+  Area Area = 1;
+}
+
+message GetProvincesReq {
+}
+
+message GetProvincesAck {
+  // 省份列表
+  repeated Area Provinces = 1;
+}
+
+message GetCitiesReq {
+  // 省份区域编码
+  string ProvinceCode = 1;
+}
+
+message GetCitiesAck {
+  // 城市列表
+  repeated Area Cities = 1;
+}
+
+message GetDistrictsReq {
+  // 城市区域编码
+  string CityCode = 1;
+}
+
+message GetDistrictsAck {
+  // 区县列表
+  repeated Area Districts = 1;
+}
+
+message GetStreetsReq {
+  // 区县区域编码
+  string DistrictCode = 1;
+}
+
+message GetStreetsAck {
+  // 街道列表
+  repeated Area Streets = 1;
+}
