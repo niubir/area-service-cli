@@ -1,4 +1,4 @@
-English | [简体中文](https://github.com/niubir/area-service-cli/blob/main/helper/README-cn.md)
+[English](https://github.com/niubir/area-service-cli/blob/main/helper/README-en.md) | 简体中文
 
 ## 用法
 
